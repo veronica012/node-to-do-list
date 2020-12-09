@@ -1,0 +1,58 @@
+{
+    "todos": [
+        {
+            "todo": "lavare la macchina",
+            "completed": true,
+            "id": 1
+        },
+        {
+            "todo": "studiare algebra",
+            "completed": true,
+            "id": 2
+        },
+        {
+            "todo": "comprare quaderni",
+            "completed": false,
+            "id": 3
+        },
+        {
+            "todo": "restituire romanzi",
+            "completed": false,
+            "id": 4
+        },
+        {
+            "todo": "fare la spesa",
+            "completed": true,
+            "id": 5
+        },
+        {
+            "todo": "rifornimento carburante",
+            "completed": true,
+            "id": 6
+        },
+        {
+            "todo": "iniziare la dieta",
+            "completed": false,
+            "id": 7
+        }
+    ],
+    
+    "activeFilter": {
+        "filter": "ALL"
+    },
+    
+    "lists": [
+        {
+            "name": "mercato",
+            "id": 5
+        },
+        {
+            "name": "home",
+            "id": 2
+        },
+        {
+            "name": "cartoleria",
+            "id": 3
+        }
+    ]
+}
