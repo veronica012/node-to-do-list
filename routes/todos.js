@@ -1,11 +1,23 @@
 const express = require('express')
 const router = express.Router()
 
+const logger = (req, res, next) => {
+    if(req.params.id >= 100) {
+        next(new Error('id cannot be > 100'))
+    }
+    next()
+}
+
+router.all('*', (req, res, next) => {
+    console.log('All middlewere')
+    next()
+})
+
 router.get('/', (req, res) => {
     res.send('todos')
 })
 
-router.get('/:id([0-9]+)', (req, res) => {
+router.get('/:id([0-9]+)', logger, (req, res) => {
     res.send('todo with id ' + req.params.id)
 })
 
