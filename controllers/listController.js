@@ -18,9 +18,9 @@ function deleteList(id) {
 }
 
 function addList(name) {
-    const newList = name
-    return data.lists.unshift(newList)
-    return newList
+    const list = {name, id:data.lists.length+1}
+    return data.lists.unshift(list)
+    return list
 }
 
 function updateList(id, name) {
