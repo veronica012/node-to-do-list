@@ -19,7 +19,12 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id([0-9]+)', logger, (req, res) => {
-    res.send('todo with id ' + req.params.id)
+    res.json(Controller.getTodoById(req.param.id))
+})
+
+router.delete('/:id([0-9]+)', (req, res) => {
+    const deletedTodo = deleteTodo(req.params.id)
+    res.status(deleted? 200: 404).json(deletedTodo? deletedTodo: null)
 })
 
 module.exports = router
