@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id([0-9]+)', logger, (req, res) => {
-    res.json(Controller.getTodoById(req.param.id))
+    res.json(Controller.getTodoById(req.params.id))
 })
 
 router.delete('/:id([0-9]+)', (req, res) => {

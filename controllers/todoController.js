@@ -5,7 +5,7 @@ function getTodos() {
 }
 
 function getTodoById(id) {
-    return data.todos.find((todo) => todo.id == id)
+    return data.todos.find(todo => todo.id == id)
 }
 
 function deleteTodo() {
