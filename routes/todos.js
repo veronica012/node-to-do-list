@@ -23,8 +23,14 @@ router.get('/:id([0-9]+)', logger, (req, res) => {
 })
 
 router.delete('/:id([0-9]+)', (req, res) => {
-    const deletedTodo = deleteTodo(req.params.id)
-    res.status(deleted? 200: 404).json(deletedTodo? deletedTodo: null)
+    const deletedTodo =  Controller.deleteTodo(req.params.id)
+    res.status(deletedTodo? 200: 404).json(deletedTodo? deletedTodo: null)
 })
+
+router.post('/', (req, res) => {
+    console.log(req.body)
+    res.json(Controller.addTodo(req.body))
+
+}) 
 
 module.exports = router
