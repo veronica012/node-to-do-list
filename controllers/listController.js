@@ -33,7 +33,7 @@ function updateList(id, name) {
 }
 
 module.exports = {
-    getList,
+    getLists,
     getListById, 
     deleteList, 
     addList,

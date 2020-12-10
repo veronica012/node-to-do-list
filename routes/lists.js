@@ -2,18 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers/listController')
 
-// const logger = (req, res, next) => {
-//     if(req.params.id >= 100) {
-//         next(new Error('id cannot be > 100'))
-//     }
-//     next()
-// }
-
-// router.all('*', (req, res, next) => {
-//     console.log('All middlewere')
-//     next()
-// })
-
 router.get('/', (req, res) => {
     res.json(Controller.getLists())
 })
