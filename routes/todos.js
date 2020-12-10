@@ -30,7 +30,11 @@ router.delete('/:id([0-9]+)', (req, res) => {
 router.post('/', (req, res) => {
     console.log(req.body)
     res.json(Controller.addTodo(req.body))
-
 }) 
+
+router.patch('/:id([0-9]+)', (req, res) => {
+    console.log(req.body)
+    res.json(Controller.updateTodo(req.params.id, req.body))
+})
 
 module.exports = router
