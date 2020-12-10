@@ -24,11 +24,12 @@ function addTodo({todo, completed, list}) {
 }
 
 function updateTodo(id, updatedTodo) {
-   const oldTodo = getTodoById(id)
-   if(oldTodo) {
-        data.todos[id] = {...oldTodo, ...updateTodo}
-        return data.todos[id]
-   }
+    const idx = data.todos.findIndex(todo => todo.id == id)
+    if(idx !== -1) {
+       data.todos[idx] = {...data.todos[idx], ...updatedTodo}
+        return data.todos[idx]
+    }
+    return false
 }
 
 module.exports = {

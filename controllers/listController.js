@@ -24,12 +24,12 @@ function addList(name) {
 }
 
 function updateList(id, name) {
-   const oldlist = getListById(id)
-   if(oldlist) {
-        data.lists[id] = {...oldlist, name}
-        return data.lists[id]
-   }
-   return false
+    const idx = data.lists.findIndex(list => list.id == id)
+    if (idx > -1) {
+        data.lists[idx] = {...data.lists[idx], name}
+        return data.lists[idx]
+    }
+    return false
 }
 
 module.exports = {
