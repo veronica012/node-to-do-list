@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const Controller = require('../controllers/todoController')
 
 const logger = (req, res, next) => {
     if(req.params.id >= 100) {
@@ -14,7 +15,7 @@ router.all('*', (req, res, next) => {
 })
 
 router.get('/', (req, res) => {
-    res.send('todos')
+    res.json(Controller.getTodos())
 })
 
 router.get('/:id([0-9]+)', logger, (req, res) => {
