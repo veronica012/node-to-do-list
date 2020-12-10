@@ -5,7 +5,7 @@ function getLists() {
 }
 
 function getListById(id) {
-    return data.listss.find(list => list.id == id)
+    return data.lists.find(list => list.id == id)
 }
 
 function deleteList(id) {
@@ -24,9 +24,9 @@ function addList(name) {
 }
 
 function updateList(id, name) {
-   const oldList = getListById(id)
-   if(oldList) {
-        data.lists[id] = {...oldList, name}
+   const oldlist = getListById(id)
+   if(oldlist) {
+        data.lists[id] = {...oldlist, name}
         return data.lists[id]
    }
    return false
