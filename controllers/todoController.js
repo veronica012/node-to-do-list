@@ -27,6 +27,7 @@ function updateTodo(id, updatedTodo) {
    const oldTodo = getTodoById(id)
    if(oldTodo) {
         data.todos[id] = {...oldTodo, ...updateTodo}
+        return data.todos[id]
    }
 }
 

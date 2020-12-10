@@ -33,8 +33,10 @@ router.post('/', (req, res) => {
 }) 
 
 router.patch('/:id([0-9]+)', (req, res) => {
-    console.log(req.body)
-    res.json(Controller.updateTodo(req.params.id, req.body))
+    console.log(req.body, req.params.id)
+    const updated = Controller.updateTodo(req.params.id, req.body)
+    res.status(updated? 200: 404).json(updated? updated: 'not found')
+
 })
 
 module.exports = router
