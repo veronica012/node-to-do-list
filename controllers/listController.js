@@ -1,26 +1,24 @@
 const data = require('../data')
+const pool = require('../db-conn')
 
-function getLists() {
-    return data.lists;
+async function getLists() {
+    const [result]= await pool.query('SELECT * FROM lists');
+    return result
 }
 
-function getListById(id) {
-    return data.lists.find(list => list.id == id)
+async function getListById(id) {
+    const [result]= await pool.query('SELECT * FROM lists WHERE id =?', [id]);
+    return result[0]
 }
 
-function deleteList(id) {
-    const idx = data.lists.findIndex(list => list.id == id)
-    if(idx > -1) {
-        const deleted = data.lists.splice(idx, 1)
-        return 1
-    }
-    return 0
+async function deleteList(id) {
+    const [result]= await pool.query('DELETE  FROM lists WHERE id =?', [id]);
+    return result
 }
 
-function addList(name) {
-    const list = {name, id:data.lists.length+1}
-    return data.lists.unshift(list)
-    return list
+async function addList(name) {
+    const [result]= await pool.query('INSERT INTO lists (name, user_id, created_at) values (?, ?, ?)', [name, 1, new Date()]);
+    return await getListById(result.insertId)
 }
 
 function updateList(id, name) {

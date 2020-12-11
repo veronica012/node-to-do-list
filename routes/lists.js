@@ -2,23 +2,40 @@ const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers/listController')
 
-router.get('/', (req, res) => {
-    res.json(Controller.getLists())
+router.get('/', async (req, res) => {
+    try {
+        const result = await Controller.getLists()
+        res.json(result)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
-router.get('/:id([0-9]+)', (req, res) => {
-    const result = Controller.getListById(req.params.id)
-    res.status(result? 200: 404).json(result? result: null)
+router.get('/:id([0-9]+)', async (req, res) => {
+    try {
+        const result = await Controller.getListById(req.params.id)
+        res.status(result? 200: 404).json(result? result: null)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
-router.delete('/:id([0-9]+)', (req, res) => {
-    const deletedList =  Controller.deleteList(req.params.id)
-    res.status(deletedList? 200: 404).json(deletedList? deletedList: null)
+router.delete('/:id([0-9]+)', async (req, res) => {
+    try {
+        const deletedList =  await Controller.deleteList(req.params.id)
+        res.status(deletedList? 200: 404).json(deletedList? deletedList: null)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
-router.post('/', (req, res) => {
-    console.log(req.body)
-    res.json(Controller.addList(req.body))
+router.post('/', async (req, res) => {
+    try {
+        const result = await  Controller.addList(req.body.name)
+        res.json(result)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 }) 
 
 router.patch('/:id([0-9]+)', (req, res) => {
