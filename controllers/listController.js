@@ -17,17 +17,17 @@ async function deleteList(id) {
 }
 
 async function addList(name) {
+    const created_at = new Date()
     const [result]= await pool.query('INSERT INTO lists (name, user_id, created_at) values (?, ?, ?)', [name, 1, new Date()]);
-    return await getListById(result.insertId)
+    //const list = await getListById(result.insertId)
+    return {id: result.insertId, name, user_id: 1, created_at}
+    return list
 }
 
-function updateList(id, name) {
-    const idx = data.lists.findIndex(list => list.id == id)
-    if (idx > -1) {
-        data.lists[idx] = {...data.lists[idx], name}
-        return data.lists[idx]
-    }
-    return false
+async function updateList(id, name) {
+    const updated_at = new Date()
+    const [result]= await pool.query('UPDATE lists SET name=?, updated_at=? WHERE id =?', [name, updated_at, id])
+    return {id, name, user_id: 1, updated_at}
 }
 
 module.exports = {

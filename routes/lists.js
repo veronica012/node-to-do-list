@@ -38,12 +38,13 @@ router.post('/', async (req, res) => {
     }
 }) 
 
-router.patch('/:id([0-9]+)', (req, res) => {
-    console.log(req.body, req.params.id)
-    const updatedList = Controller.updateList(req.params.id, req.body)
-    console.log(updatedList)
-    res.status(updatedList? 200: 404).json(updatedList? updatedList: 'not found')
-
+router.patch('/:id([0-9]+)', async (req, res) => {
+    try{
+        const updatedList = await Controller.updateList(req.params.id, req.body.name)
+        res.status(updatedList? 200: 404).json(updatedList ? updatedList: 404)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
 module.exports = router
