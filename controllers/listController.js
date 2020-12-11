@@ -13,7 +13,7 @@ async function getListById(id) {
 
 async function deleteList(id) {
     const [result]= await pool.query('DELETE FROM lists WHERE id =?', [id]);
-    return result
+    return result.affectedRows
 }
 
 async function addList(name) {

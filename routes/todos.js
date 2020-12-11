@@ -44,7 +44,7 @@ router.delete('/:id([0-9]+)', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const result = await  Controller.addTodo(req.body.todo, req.body.completed, req.body.list_id)
+        const result = await  Controller.addTodo(req.body)
         res.json(result)
     } catch (e) {
         res.status(500).send(e.toString())
@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id([0-9]+)', async (req, res) => {
     try{
-        const updatedTodo = await Controller.updateTodo(req.params.id, req.body.todo, req.body.completed, req.body.list_id)
+        const updatedTodo = await Controller.updateTodo(req.params.id, req.body)
         res.status(updatedTodo? 200: 404).json(updatedTodo ? updatedTodo: 404)
     } catch (e) {
         res.status(500).send(e.toString())

@@ -13,7 +13,7 @@ async function getTodoById(id) {
 
 async function deleteTodo(id) {
     const [result] = await pool.query('DELETE FROM todos WHERE id=?', [id])
-    return result
+    return result.affectedRows
 }
 
 async function addTodo(todo, completed, list_id) {
