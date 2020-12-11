@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/veronica012/node-to-do-list#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5"
   }
 }
