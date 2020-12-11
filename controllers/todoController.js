@@ -16,14 +16,14 @@ async function deleteTodo(id) {
     return result
 }
 
-async function addTodo({todo, completed, list}) {
+async function addTodo(todo, completed, list_id) {
     const created_at = new Date()
-    const [result] = await pool.query('INSERT INTO todos (todo, completed, list_id, created_at) values (?, ?, ?, ?)', [todo, complete, list_id, new Date()])
+    const [result] = await pool.query('INSERT INTO todos (todo, completed, list_id, created_at) values (?, ?, ?, ?)', [todo, completed, list_id, new Date()])
     return {id: result.insertId, todo, completed, list_id, created_at}
     return todo
 }
 
-async function updateTodo(id, updatedTodo) {
+async function updateTodo(id, todo, completed, list_id) {
     const updated_at = new Date()
     const [result] = await pool.query('UPDATE todos SET todo=?, completed=?, list_id=?, updated_at=? WHERE id=?', [todo, completed, list_id, updated_at, id])
     return {id, todo, completed, list_id, updated_at}

@@ -14,29 +14,50 @@ router.all('*', (req, res, next) => {
     next()
 })
 
-router.get('/', (req, res) => {
-    res.json(Controller.getTodos())
+router.get('/', async (req, res) => {
+    try {
+        const result = await Controller.getTodos()
+        res.json(result)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
-router.get('/:id([0-9]+)', logger, (req, res) => {
-    res.json(Controller.getTodoById(req.params.id))
+router.get('/:id([0-9]+)', logger, async (req, res) => {
+   // res.json(Controller.getTodoById(req.params.id))
+   try {
+        const result = await Controller.getTodoById(req.params.id)
+        res.status(result? 200: 404).json(result? result: null)
+   } catch (e) {
+        res.status(500).send(e.toString())
+   }
 })
 
-router.delete('/:id([0-9]+)', (req, res) => {
-    const deletedTodo =  Controller.deleteTodo(req.params.id)
-    res.status(deletedTodo? 200: 404).json(deletedTodo? deletedTodo: null)
+router.delete('/:id([0-9]+)', async (req, res) => {
+    try {
+        const deletedTodo =  await Controller.deleteTodo(req.params.id)
+        res.status(deletedTodo? 200: 404).json(deletedTodo? deletedTodo: null)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
-router.post('/', (req, res) => {
-    console.log(req.body)
-    res.json(Controller.addTodo(req.body))
+router.post('/', async (req, res) => {
+    try {
+        const result = await  Controller.addTodo(req.body.todo, req.body.completed, req.body.list_id)
+        res.json(result)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 }) 
 
-router.patch('/:id([0-9]+)', (req, res) => {
-    console.log(req.body, req.params.id)
-    const updated = Controller.updateTodo(req.params.id, req.body)
-    res.status(updated? 200: 404).json(updated? updated: 'not found')
-
+router.patch('/:id([0-9]+)', async (req, res) => {
+    try{
+        const updatedTodo = await Controller.updateTodo(req.params.id, req.body.todo, req.body.completed, req.body.list_id)
+        res.status(updatedTodo? 200: 404).json(updatedTodo ? updatedTodo: 404)
+    } catch (e) {
+        res.status(500).send(e.toString())
+    }
 })
 
 module.exports = router
