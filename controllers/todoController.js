@@ -1,35 +1,32 @@
 const data = require('../data')
+const pool = require('../db-conn')
 
-function getTodos() {
-    return data.todos;
+async function getTodos() {
+   const [result] = await pool.query('SELECT * FROM todos')
+   return result
 }
 
-function getTodoById(id) {
-    return data.todos.find(todo => todo.id == id)
+async function getTodoById(id) {
+    const [result] = await pool.query('SELECT * FROM todos WHERE id=?', [id])
+    return result[0]
 }
 
-function deleteTodo(id) {
-    const idx = data.todos.findIndex(todo => todo.id == id)
-    if(idx > -1) {
-        const deleted = data.todos.splice(idx, 1)
-        return 1
-    }
-    return 0
+async function deleteTodo(id) {
+    const [result] = await pool.query('DELETE FROM todos WHERE id=?', [id])
+    return result
 }
 
-function addTodo({todo, completed, list}) {
-    const newTodo = {todo, completed, list}
-    return data.todos.unshift(newTodo)
-    return newTodo
+async function addTodo({todo, completed, list}) {
+    const created_at = new Date()
+    const [result] = await pool.query('INSERT INTO todos (todo, completed, list_id, created_at) values (?, ?, ?, ?)', [todo, complete, list_id, new Date()])
+    return {id: result.insertId, todo, completed, list_id, created_at}
+    return todo
 }
 
-function updateTodo(id, updatedTodo) {
-    const idx = data.todos.findIndex(todo => todo.id == id)
-    if(idx !== -1) {
-       data.todos[idx] = {...data.todos[idx], ...updatedTodo}
-        return data.todos[idx]
-    }
-    return false
+async function updateTodo(id, updatedTodo) {
+    const updated_at = new Date()
+    const [result] = await pool.query('UPDATE todos SET todo=?, completed=?, list_id=?, updated_at=? WHERE id=?', [todo, completed, list_id, updated_at, id])
+    return {id, todo, completed, list_id, updated_at}
 }
 
 module.exports = {
