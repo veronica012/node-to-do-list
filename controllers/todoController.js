@@ -1,6 +1,11 @@
 const data = require('../data')
 const pool = require('../db-conn')
 
+async function getTodosByListId(list_id) {
+    const [result] = await pool.query('SELECT * FROM todos WHERE list_id', [list_id])
+    return result
+}
+
 async function getTodos() {
    const [result] = await pool.query('SELECT * FROM todos')
    return result
@@ -30,6 +35,7 @@ async function updateTodo(id, todo, completed, list_id) {
 }
 
 module.exports = {
+    getTodosByListId,
     getTodos,
     getTodoById, 
     deleteTodo, 

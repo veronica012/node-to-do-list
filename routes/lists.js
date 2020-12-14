@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Controller = require('../controllers/listController')
+const todoController = require('../controllers/todoController')
+
+
 
 router.get('/', async (req, res) => {
     try {
@@ -10,6 +13,15 @@ router.get('/', async (req, res) => {
         res.status(500).send(e.toString())
     }
 })
+
+// router.get('/:list_id([0-9]+)/todos', async (req, res) => {
+//     try {
+//         const result = await todoController.getTodosByListId(req.params.list_id)
+//         res.json(result)
+//     } catch (e) {
+//         res.status(500).send(e.toString())
+//     }
+// })
 
 router.get('/:id([0-9]+)', async (req, res) => {
     try {
